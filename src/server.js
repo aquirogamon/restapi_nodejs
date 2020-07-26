@@ -15,23 +15,29 @@ app.get('/usuario', function(req, res) {
 
 app.post('/usuario', function(req, res) {
     let body = req.body;
-    if (body.nombre === undefined)
+    if (body.nombre === undefined) {
         res.status(400).json({
             ok: false,
             mensaje: 'El nombre es necesario'
         });
-    res.json({ personan: body });
+    } else {
+        res.json({
+            personan: body
+        });
+    }
 });
 
 app.put('/usuario/:id', function(req, res) {
     let id = req.params.id;
-    res.json({ id });
+    res.json({
+        id
+    });
 });
 
 app.delete('/usuario/:id', function(req, res) {
     res.json('delete Usuario');
 });
 
-app.listen(3000, () => {
+app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto: ', process.env.PORT);
 });
