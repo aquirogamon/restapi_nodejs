@@ -33,5 +33,5 @@ app.delete('/usuario/:id', function(req, res) {
 });
 
 app.listen(3000, () => {
-    console.log(`Server escuchando en el puerto 3000`);
+    console.log('Escuchando puerto: ', process.env.PORT);
 });
