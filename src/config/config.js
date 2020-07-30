@@ -9,7 +9,7 @@ let urlDB;
 if (process.env.NODE_ENV === 'dev') {
     urlDB = 'mongodb://localhost:27017/apiCafe';
 } else {
-    urlDB = 'mongodb://aquirogamon:nrcu2F6TXna1dueF@cluster0.z2yfw.mongodb.net/apiCafe';
+    urlDB = process.env.MONGO_URI;
 }
 
 process.env.URLDB = urlDB;
