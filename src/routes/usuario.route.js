@@ -1,10 +1,12 @@
 const express = require('express');
-const app = express();
 const Usuario = require('../model/usuario.js');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
+const { verificationToken, verficationAdminRoles } = require('../middlewares/autenticacion');
 
-app.get('/usuario', function(req, res) {
+const app = express();
+
+app.get('/usuario', [verificationToken, verficationAdminRoles], function(req, res) {
     let skip = req.query.skip || 0;
     skip = Number(skip);
 
@@ -31,7 +33,7 @@ app.get('/usuario', function(req, res) {
         });
 });
 
-app.post('/usuario', function(req, res) {
+app.post('/usuario', [verificationToken, verficationAdminRoles], function(req, res) {
     let body = req.body;
 
     let usuario = new Usuario({
@@ -57,7 +59,7 @@ app.post('/usuario', function(req, res) {
     });
 });
 
-app.put('/usuario/:id', function(req, res) {
+app.put('/usuario/:id', [verificationToken, verficationAdminRoles], function(req, res) {
     let id = req.params.id;
     let body = _.pick(req.body, ['username', 'name', 'lastname', 'email', 'img', 'role', 'state']);
 
@@ -75,7 +77,7 @@ app.put('/usuario/:id', function(req, res) {
     });
 });
 
-app.delete('/usuario/:id', function(req, res) {
+app.delete('/usuario/:id', [verificationToken, verficationAdminRoles], function(req, res) {
     let id = req.params.id;
     //Usuario.findByIdAndRemove(id, (err, usuario) => {
     let changestate = {

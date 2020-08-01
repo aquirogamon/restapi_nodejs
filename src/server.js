@@ -1,9 +1,8 @@
 require('./config/config.js');
 const express = require('express');
-const bodyParser = require('body-parser');
 const app = express();
-
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Routes
-app.use(require('./routes/usuario.route.js'));
+app.use(require('./routes/index'));
 
 mongoose.connect(process.env.URLDB, {
     useNewUrlParser: true,
